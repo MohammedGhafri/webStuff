@@ -13,7 +13,7 @@
 
 import sqlite3
 from sqlite3 import Error
-
+import os
 
 def create_connection(db_file):
     """ create a database connection to the SQLite database
@@ -53,15 +53,17 @@ def select_task_by_priority(conn, priority):
     :return:
     """
     cur = conn.cursor()
-    cur.execute("SELECT * FROM stats")
+    print('000000')
+    # cur.execute("SELECT * FROM urls")
     # cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
+    cur.execute("select url, title, visit_count, last_visit_time from urls")
     rows = cur.fetchall()
     # print(type(rows),len(rows),rows[0])
 
-    # with open('out_filename_login.txt', 'w') as out_file:
-    #     pass
-    #     # out_file.write(rows)
-    #     out_file.writelines(str(rows)+'/n')
+    with open('out_filename_login.txt', 'w') as out_file:
+        pass
+        # out_file.write(rows)
+        out_file.writelines(str(rows)+'/n')
     #  .. 
     #  .. 
     #  .. parsed_line
@@ -83,7 +85,7 @@ def select_task_by_priority(conn, priority):
 
 
 def main():
-    database = r"Login_Data"
+    database = r"/home/mghafri/.config/google-chrome/Default/History"
 
     # create a database connection
     conn = create_connection(database)
@@ -93,7 +95,11 @@ def main():
 
         print("2. Query all tasks")
         # select_all_tasks(conn)
-
+def sizeFunction(pathToFile):
+    s = os.path.getsize(pathToFile)
+    print(s)
 
 if __name__ == '__main__':
-    main()
+    # main()
+    database_distenation = r"/home/mghafri/.config/google-chrome/Default/History"
+    sizeFunction(database_distenation)

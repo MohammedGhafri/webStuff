@@ -1,10 +1,10 @@
 import socket,sys
-from thread import *
+from _thread import *
 
 def main():
     global listen_port, buffer_size, max_conn
     try:
-        listen_port = int(raw_input("Enter a Listening port:"))
+        listen_port = int(input("Enter a Listening port:"))
     except KeyboardInterrupt:
         sys.exit(0)
     max_conn = 5
@@ -35,10 +35,13 @@ def main():
 def conn_string(conn,data,addr):
     print("Conn_string",conn,data,addr)
     try:
-        first_line = data.split("\n")[0]
-        url = first_line(" ")[1]
-        print(40)
+        # data = data.encode()
+        first_line = data.decode().split("\n")[0]
+        print(39999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)
+        url = first_line.split(" ")[1]
+        print(40000000000000000000000000000000,url)
         http_pos = url.find("://")
+        print(0000000000000000000000000000000,http_pos)
         if http_pos == -1:
             temp = url
         else: temp = url[(http_pos + 3):1]
